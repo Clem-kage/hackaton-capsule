@@ -1,11 +1,13 @@
+require('dotenv').config();
 const cors = require('cors');
 var express = require('express');
+require('./connection/connection')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 console.log('okey')
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var trajetsRouter = require('./routes/trajets');
+// var usersRouter = require('./routes/users');
 var app = express();
 app.use(cors());
 app.use(logger('dev'));
@@ -14,7 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);  
+app.use('/trajets', trajetsRouter);
+// app.use('/users', usersRouter);  
 
 module.exports = app;
