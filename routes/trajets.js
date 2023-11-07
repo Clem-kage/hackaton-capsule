@@ -16,7 +16,6 @@ router.get('/', async function(req, res, next) {
 
 
 router.post('/', async function(req, res, next){
-  
   try{
      const target = await Trajet.find({departure: req.body.departure, arrival: req.body.arrival})
      res.status(200).json({message: target})
