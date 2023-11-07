@@ -5,19 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style src="/style.css"></style>
+    <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
     <div id="header">
+        <div id="logoLeftContainer">
+            <a id="logo" href="homepage.html">Tickethack</a>
+        </div>
 
+        <div id="userbuttons">
+            <a id="cartbutton" class="topButton" href="/cart.html">Cart</a>
+            <a id="bookingbutton" class="topButton" href="/booking.html">Bookings</a>
+        </div>
     </div>
-    <div id="banner"></div>
-    <div id="search-container">
 
-    </div>
-    <div id="logo-container">
-
+    <div id="mainContainer">
+        <div id="sub-header">
+            <div id="banner">
+                <h1>Explore the world effortlessly by train !</h1>
+                <p>Compare, book and enjoy cheap prices for train tickets: your journey starts on Tickethack</p>
+            </div>
+        </div>
+        <div id="query-container">
+            <div id="search-container">
+                <input id="departureInput" class="inputBlock" type="text" placeholder="Departure" />
+                <input id="arrivalInput" class="inputBlock" type="text" placeholder="Arrival" />
+                <input id="calendar" class="inputBlock" type="date" value="2023/11/07" min="2023/01/01"
+                    max="2023/12/25" />
+                <a id="searchButton" class="buttons" href="/booking.html">Search</a>
+            </div>
+            <div id="result-container">
+                <a id="baseline">
+                    <img id="baselineIcon" src="/images/train.png" />
+                    <p>It's time to book your future trip.</p>
+                </a>
+            </div>
+        </div>
     </div>
 
     <script src="/script.js"></script>
