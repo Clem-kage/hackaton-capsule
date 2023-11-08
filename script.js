@@ -33,7 +33,7 @@ document.querySelector('#searchButton').addEventListener('click', function () {
                                 <p class="arrival">${data.trajets[i].arrival}</p>
                                 <p class="date">${data.trajets[i].date}</p>
                                 <p class="price">${data.trajets[i].price}</p>
-                                <button class="bookButton" id="${data.trajets[i].id}">Book</button>
+                                <button class="bookButton" id="${data.trajets[i].id} href="/cart.html">Book</button>
                             </div>`;
                     }
                     document.querySelector('#result-container').innerHTML = newElement;
@@ -49,9 +49,10 @@ function updateBookButtonEventListener() {
             fetch(`/${this.id}`, { method: 'GET' })//Needs API
                 .then(response => response.json())
                 .then(data => {
-                    window.location.assign("/cart.html")
+                    location.assign("/cart.html")
                 })
         });
     }
 }
 
+document.querySelector('#cartBoard')
