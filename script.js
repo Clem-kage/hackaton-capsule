@@ -49,8 +49,9 @@ function updateBookButtonEventListener() {
             fetch(`/${this.id}`, { method: 'GET' })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
+
                 })
         });
     }
 }
+
