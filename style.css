@@ -86,6 +86,11 @@ body {
     margin-top: 25vh;
 }
 
+#searchButton:hover {
+    background-color: black;
+    cursor: pointer;
+}
+
 #result-container {
     display: inline-block;
     text-align: center;
