@@ -49,7 +49,7 @@ function updateBookButtonEventListener() {
             fetch(`/${this.id}`, { method: 'GET' })
                 .then(response => response.json())
                 .then(data => {
-
+                    window.location.assign("/cart.html")
                 })
         });
     }

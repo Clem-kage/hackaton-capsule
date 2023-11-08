@@ -108,6 +108,7 @@ body {
 #cartContainer {
     padding: 200px;
     background-color: #ddd;
+    text-align: center;
 }
 
 #cartBoard {
@@ -118,6 +119,10 @@ body {
     border-radius: 8px;
     padding: 50px;
     background-color: #f9f9f9;
+}
+
+#myCart {
+    margin-bottom: 75px;
 }
 
 
