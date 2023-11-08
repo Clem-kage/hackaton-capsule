@@ -26,34 +26,70 @@ router.post("/", async function (req, res, next) {
 
 // ajout de réservation
 router.post("/add", async function (req, res, next) {
-  const userDisplayed = await User.find({ name: req.body.name }).populate(
-    "reservations"
-  );
-  const allReservations = userDisplayed[0].reservations;
-  const targetTrajet = await Trajet.find({
-    departure: req.body.departure,
-    arrival: req.body.arrival,
-    date: req.body.date,
-  });
-  console.log(userDisplayed);
-  if (!allReservations.includes(targetTrajet[0]._id)) {
-    User.updateOne(
-      { name: req.body.name },
-      { $push: { reservations: targetTrajet[0]._id.toString() } }
-    )
-      .then((data) => {
-        res.status(200).json({
-          message: allReservations,
-        });
-      })
-      .catch((err) => {
-        res.status(400).json({
-          message: "error",
-        });
-      });
-  } else {
-    return;
+const reqUser = await User.findOne({
+  name: req.body.name
+}).populate('reservations');
+
+const resas = reqUser.reservations
+console.log(resas)
+
+
+const targettedTrajet = await Trajet.findOne({
+  departure: req.body.departure,
+  arrival: req.body.arrival,
+  date: new Date(req.body.date)
+  })
+  const heureDeDepart = `${new Date(req.body.date).getHours()}h${new Date(req.body.date).getMinutes()}` 
+  console.log(heureDeDepart)
+  
+  
+if(!targettedTrajet){
+  res.status(400).json({
+    message: "no target"
+  })
+}
+else{
+  const display ={
+    start: targettedTrajet.departure,
+    arrive: targettedTrajet.arrival,
+    startHour: heureDeDepart,
+    price: targettedTrajet.price,
   }
+  res.status(200).json({
+    targettedTrajet, display
+  })
+
+  const existantId = resas.find((el)=> {
+    console.log('el ===', el._id)
+    console.log('target ===', targettedTrajet._id)
+    return el._id.toString() === targettedTrajet._id.toString()})
+  if(!existantId){
+    console.log(existantId)
+  User.updateOne({
+    name: req.body.name
+  }, 
+  { $push: {reservations:  targettedTrajet._id}})
+  .then((data)=>{ 
+    console.log('ok', data)
+    res.status(200).json({message: 'new trajet', display})
+  })
+  .catch((err)=>{
+    console.log('error')
+    res.status(200).json({message: 'trajet déja enregistré'})
+
+  })
+}
+else{
+  console.log('error')
+  return 
+}
+
+
+
+
+// console.log(reqUser);
+   
+}
 });
 
 module.exports = router;
