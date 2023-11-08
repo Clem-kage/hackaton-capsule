@@ -92,4 +92,46 @@ else{
 }
 });
 
+
+
+router.delete("/del", async function (req, res, next) {
+
+const reqUser = await User.findOne({
+  name: req.body.name
+}).populate('reservations');
+
+let resas = reqUser.reservations;
+
+const targettedTrajet = await Trajet.findOne({
+  departure: req.body.departure,
+  arrival: req.body.arrival,
+  date: new Date(req.body.date)
+  })
+
+const existantId = resas.find((el)=> {
+    console.log('el ===', el._id)
+    console.log('target ===', targettedTrajet._id)
+    return el._id.toString() === targettedTrajet._id.toString()})
+
+if(!existantId){
+  return 
+}
+else{
+  User.updateOne({
+    name: req.body.name
+  }, 
+  { $pull: {reservations:  targettedTrajet._id}})
+  .then((data)=>{
+    resas = reqUser.reservations
+    res.status(200).json({
+      resas
+    })
+  })
+}
+
+
+
+
+
+})
 module.exports = router;
