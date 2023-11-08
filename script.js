@@ -17,7 +17,7 @@ document.querySelector('#searchButton').addEventListener('click', function () {
         let currentResultContainer = document.querySelector('#result-container');
         currentResultContainer.innerHTML = newMessageElement.innerHTML;
     } else {
-        fetch('', {
+        fetch('', {//API placeholder
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ trips, arrival, calendar }),
@@ -46,7 +46,7 @@ document.querySelector('#searchButton').addEventListener('click', function () {
 function updateBookButtonEventListener() {
     for (let i = 0; i < document.querySelectorAll('.bookButton').length; i++) {
         document.querySelectorAll('.bookButton')[i].addEventListener('click', function () {
-            fetch(`/${this.id}`, { method: 'GET' })
+            fetch(`/${this.id}`, { method: 'GET' })//Needs API
                 .then(response => response.json())
                 .then(data => {
                     window.location.assign("/cart.html")
